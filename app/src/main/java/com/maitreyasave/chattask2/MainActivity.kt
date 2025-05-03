@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.maitreyasave.chattask2.di.MyApplication
 import com.maitreyasave.chattask2.ui.PlayerViewModel
 import com.maitreyasave.chattask2.ui.PlayerViewModelFactory
+import com.maitreyasave.chattask2.ui.player.PlayerListScreen
 import com.maitreyasave.chattask2.ui.theme.ChatTask2Theme
 import javax.inject.Inject
 
@@ -45,29 +46,17 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         //
-        ( application as MyApplication).appComponent.inject(this)
+        (application as MyApplication).appComponent.inject(this)
         playerViewModel = ViewModelProvider(this, playerViewModelFactory)[PlayerViewModel::class.java]
-
-        val size = playerViewModel.getPlayers().size
 
         enableEdgeToEdge()
         setContent {
             ChatTask2Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "size: $size",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                Scaffold(modifier = Modifier.fillMaxSize()) { _ ->
+                    val playerList = playerViewModel.getPlayerItemCards()
+                    PlayerListScreen(playerList)
                 }
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
 }

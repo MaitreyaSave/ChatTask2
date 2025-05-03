@@ -6,11 +6,15 @@ import com.maitreyasave.chattask2.data.PlayerUtils
 import javax.inject.Inject
 
 class PlayerViewModel @Inject constructor(
-    utils: PlayerUtils
+    val utils: PlayerUtils
 ): ViewModel() {
 
     private var players: List<Player> = utils.generateDummyPlayers()
 
     fun getPlayers() = players
+
+    fun getPlayerItemCards() = players.map {
+        utils.toPlayerItemCard(it)
+    }
 
 }
