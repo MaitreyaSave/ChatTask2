@@ -11,17 +11,21 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 
 @Composable
-fun PlayerListScreen(players: List<PlayerItemCard>) {
+fun PlayerListScreen(
+    navController: NavController,
+    players: List<PlayerItemCard>
+) {
 
     LazyColumn(
         modifier = Modifier.fillMaxWidth()
             .padding(12.dp)
     ) {
         items(players) {
-            PlayerCard(it)
+            PlayerCard(navController, it)
         }
     }
 
@@ -30,14 +34,17 @@ fun PlayerListScreen(players: List<PlayerItemCard>) {
 
 
 @Composable
-fun PlayerCard(playerItemCard: PlayerItemCard) {
+fun PlayerCard(
+    navController: NavController,
+    playerItemCard: PlayerItemCard
+) {
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(12.dp),
         onClick =  {
-            // TODO
+            navController.navigate("detail/${playerItemCard.name}")
         }
     ) {
 

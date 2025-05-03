@@ -55,6 +55,9 @@ dependencies {
     implementation("com.google.dagger:dagger:2.51.1")
     kapt("com.google.dagger:dagger-compiler:2.50")
 
+    // Nav graph
+    implementation("androidx.navigation:navigation-compose:2.8.9")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
